@@ -35,7 +35,7 @@ const translate = async (word: string, targetLanguage: string) => {
     return result.ok ? head(result.translations) : ''
 }
 
-app.get('/word', async (req, res) => {
+app.get('/random-word.json', async (req, res) => {
     const word = getRandomWordFromList()
     const w = extractOnlyWord(word)
     const response = {
