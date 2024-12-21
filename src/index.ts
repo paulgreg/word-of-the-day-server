@@ -14,7 +14,7 @@ const app = express()
 
 const WORDS: Array<string> = fs.readFileSync(WORDS_FILE, 'utf8').split('\n')
 
-const WAIT_DELAY = 2000
+const WAIT_DELAY = 1000
 
 console.log(`${WORDS.length} words loaded`)
 
@@ -26,7 +26,7 @@ const extractOnlyWord = (word: string) => word.split(' ')[0]
 
 const head = (data: Array<string>) => (data?.length > 0 ? data[0] : '')
 
-const wait = () => new Promise((resolve) => setTimeout(resolve, Math.random() * WAIT_DELAY))
+const wait = () => new Promise((resolve) => setTimeout(resolve, Math.random() * WAIT_DELAY + 500))
 
 const translate = async (word: string, targetLanguage: string) => {
     await wait() // wait a little bit
