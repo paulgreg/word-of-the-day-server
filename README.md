@@ -4,4 +4,4 @@ An API to get a random word and translation in a few languages.
 
 ## Sources
 
-  - words source : https://github.com/first20hours/google-10000-english/
+  - [5000 words list from Oxford](https://www.oxfordlearnersdictionaries.com/wordlists/oxford3000-5000)

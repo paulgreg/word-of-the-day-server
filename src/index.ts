@@ -18,10 +18,11 @@ const WAIT_DELAY = 2000
 
 console.log(`${WORDS.length} words loaded`)
 
-const getWord = () => {
+const getRandomWordFromList = () => {
     const random = Math.round(Math.random() * WORDS.length)
     return WORDS[random]
 }
+const extractOnlyWord = (word: string) => word.split(' ')[0]
 
 const head = (data: Array<string>) => (data?.length > 0 ? data[0] : '')
 
@@ -35,12 +36,13 @@ const translate = async (word: string, targetLanguage: string) => {
 }
 
 app.get('/word', async (req, res) => {
-    const word = getWord()
+    const word = getRandomWordFromList()
+    const w = extractOnlyWord(word)
     const response = {
         english: word,
-        french: await translate(word, 'french'),
-        spanish: await translate(word, 'spanish'),
-        italian: await translate(word, 'italian'),
+        french: await translate(w, 'french'),
+        spanish: await translate(w, 'spanish'),
+        italian: await translate(w, 'italian'),
     }
     res.send(response)
 })
