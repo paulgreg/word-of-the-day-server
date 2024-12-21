@@ -43,7 +43,7 @@ app.get('/random-word.json', async (req, res) => {
         french: await translate(w, 'french'),
         spanish: await translate(w, 'spanish'),
         italian: await translate(w, 'italian'),
-        german: await translate(w, 'german'),
+        portuguese: await translate(w, 'portuguese'),
     }
     res.send(response)
 })
