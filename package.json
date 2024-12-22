@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "DEBUG=true tsx watch --include './src/**/*' src/index.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "NODE_ENV=production node dist"
   },
   "author": "",
@@ -14,7 +14,8 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "reverso-api": "^2.22.10"
+    "reverso-api": "^2.22.10",
+    "tsc-alias": "^1.8.10"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
