@@ -1,51 +1,75 @@
-import express from 'express'
 import fs from 'fs'
-import Reverso from 'reverso-api'
+import express from 'express'
+import { getRandomWordFromList } from './words'
+import { translate } from './translations'
+import { generateOutputText } from './output'
+import type { OutputType } from './output'
+import { ALPHA_AND_DATE_ONLY, removeDangerousCharacters } from './string'
 
 const PORT = process.env.PORT ?? 3002
 
-const DEBUG = process.env.DEBUG ?? false
-
-const WORDS_FILE = './data/words.txt'
-
-const reverso = new Reverso()
+const ONE_HOUR = 60 * 60
 
 const app = express()
+app.set('view engine', 'ejs')
+app.set('views', './src/views')
 
-const WORDS: Array<string> = fs.readFileSync(WORDS_FILE, 'utf8').split('\n')
-
-const WAIT_DELAY = 1000
-
-console.log(`${WORDS.length} words loaded`)
-
-const getRandomWordFromList = () => {
-    const random = Math.round(Math.random() * WORDS.length)
-    return WORDS[random]
-}
-const extractOnlyWord = (word: string) => word.split(' ')[0]
+app.use(express.static('public'))
 
 const head = (data: Array<string>) => (data?.length > 0 ? data[0] : '')
 
-const wait = () => new Promise((resolve) => setTimeout(resolve, Math.random() * WAIT_DELAY + 500))
+app.get('/', async (req, res, next) => {
+    try {
+        const files = fs.readdirSync('./data/words').reverse()
+        const names = files.map((filename) => {
+            const name = filename.substring(0, filename.indexOf('.json'))
+            const parts = name.split('-')
+            const title = `${parts[2]}/${parts[1]}/${parts[0]} : ${parts[3]}`
 
-const translate = async (word: string, targetLanguage: string) => {
-    await wait() // wait a little bit
-    const result = await reverso.getContext(word, 'english', targetLanguage)
-    if (DEBUG) console.log(result)
-    return result.ok ? head(result.translations) : ''
-}
+            return { name, title }
+        })
+        res.setHeader('Cache-Control', ONE_HOUR)
+        res.render('index.ejs', { names })
+    } catch (e) {
+        next(e)
+    }
+})
+
+app.get('/words/:filename', async (req, res, next) => {
+    try {
+        const { filename } = req.params
+        const cleanFilename = removeDangerousCharacters(filename, ALPHA_AND_DATE_ONLY)
+        const path = `./data/words/${cleanFilename}.json`
+        console.info('file access:', path)
+        const file = fs.readFileSync(path)
+        const data: OutputType = JSON.parse(file.toString())
+        res.setHeader('Cache-Control', ONE_HOUR)
+        res.render('word.ejs', data)
+    } catch (e) {
+        next(e)
+    }
+})
 
 app.get('/random-word.json', async (req, res) => {
-    const word = getRandomWordFromList()
-    const w = extractOnlyWord(word)
+    const { word, w } = getRandomWordFromList()
+
+    const frenchResult = await translate(w, 'french')
+    const spanishResult = await translate(w, 'spanish')
+    const italianResult = await translate(w, 'italian')
+    const portugueseResult = await translate(w, 'portuguese')
+
     const response = {
         english: word,
-        french: await translate(w, 'french'),
-        spanish: await translate(w, 'spanish'),
-        italian: await translate(w, 'italian'),
-        portuguese: await translate(w, 'portuguese'),
+        french: head(frenchResult?.translations),
+        spanish: head(spanishResult?.translations),
+        italian: head(italianResult?.translations),
+        portuguese: head(portugueseResult?.translations),
     }
+
+    res.setHeader('Cache-Control', ONE_HOUR)
     res.send(response)
+
+    await generateOutputText(word, w, [frenchResult, spanishResult, italianResult, portugueseResult])
 })
 
 app.listen(PORT, () => {

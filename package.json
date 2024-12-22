@@ -4,20 +4,21 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "DEBUG=true node --experimental-strip-types src/index.ts",
+    "dev": "DEBUG=true tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc",
-    "start": "node dist"
+    "start": "NODE_ENV=production node dist"
   },
   "author": "",
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "reverso-api": "^2.22.10"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "nodemon": "^3.1.9",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }
 }

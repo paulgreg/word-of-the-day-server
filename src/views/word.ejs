@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Word of the day : <%= word %></title>
+        <link rel="stylesheet" href="../css/simple.css" />
+        <meta name="robots" content="noindex,nofollow" />
+    </head>
+
+    <body>
+        <h1><a href="../">Word of the day</a> : <%= word %></h1>
+
+        <% results.forEach((result)=> { %>
+        <section>
+            <h2><%= result.target %> : <%= result.translations.join(', ') %></h2>
+
+            <details>
+                <summary>Examples</summary>
+                <dl>
+                    <% result.examples.forEach(({source, target})=> { %>
+
+                    <dt><%= source %></dt>
+                    <dd><%= target %></dd>
+                    <% }) %>
+                </dl>
+            </details>
+        </section>
+        <% }) %>
+    </body>
+</html>

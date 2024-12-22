@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Word of the day</title>
+        <link rel="stylesheet" href="./css/simple.css" />
+        <meta name="robots" content="noindex,nofollow" />
+    </head>
+
+    <body>
+        <h1>Word of the day</h1>
+
+        <ol reversed>
+            <% names.forEach(({name, title})=> {%>
+            <li><a href="./words/<%= name %>"> <%= title %> </a></li>
+            <% }) %>
+        </ol>
+    </body>
+</html>

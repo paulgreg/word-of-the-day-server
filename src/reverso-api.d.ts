@@ -1,4 +1,16 @@
 // reverso-api.d.ts
+interface ReversoResponse {
+    ok: boolean
+    text: string
+    source: string
+    target: string
+    translations: string[]
+    examples: Array<{
+        source: string
+        target: string
+    }>
+}
+
 declare module 'reverso-api' {
     class Reverso {
         constructor()
@@ -8,16 +20,6 @@ declare module 'reverso-api' {
             sourceLang: string, // Source language (e.g., 'english')
             targetLang: string // Target language (e.g., 'russian')
         ): Promise<ReversoResponse>
-    }
-
-    interface ReversoResponse {
-        ok: boolean
-        context: string // Example field, adapt this to the actual API response structure
-        translations: string[] // Translated texts in an array
-        examples: Array<{
-            source: string // Example source sentence
-            target: string // Example target sentence
-        }>
     }
 
     export = Reverso
