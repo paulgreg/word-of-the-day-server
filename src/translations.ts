@@ -14,5 +14,6 @@ export const translate = async (word: string, targetLanguage: string): Promise<R
     return {
         ...result,
         translations: result.translations.filter((t) => t.length > 0),
+        examples: result.examples.slice(0, 3),
     }
 }
