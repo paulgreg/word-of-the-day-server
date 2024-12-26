@@ -24,7 +24,7 @@ export const translateWithRetry = async (word: string, language: string, maxRetr
     do {
         let delay = WAIT_DELAY * c++
         if (process.env.DEBUG) console.log(`translateWithRetry: try ${c}/${maxRetries}, waiting ${delay}`)
-        wait(delay)
+        await wait(delay)
         result = await translate(word, language)
         if (c > maxRetries) throw new Error(`fail to translate ${word} in ${language}`)
     } while (!result.ok || !result?.translations?.length || !result?.examples?.length)
