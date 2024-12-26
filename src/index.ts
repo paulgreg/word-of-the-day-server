@@ -59,9 +59,8 @@ app.get('/word-of-the-day.json', async (req, res, next) => {
 
         res.setHeader('Cache-Control', ONE_HOUR)
         res.send({
-            word: data.word,
-            languages,
-            translations,
+            languages: ['en'].concat(languages),
+            translations: [data.word].concat(translations),
         })
     } catch (e) {
         next(e)
