@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "DEBUG=true tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc && tsc-alias",
+    "generate-word-of-the-day": "node dist/build-word-of-the-day.js",
     "start": "NODE_ENV=production node dist"
   },
   "author": "",
