@@ -1,10 +1,8 @@
 import fs from 'fs'
 import express from 'express'
-import { getRandomWordFromList } from './words'
-import { translate } from './translations'
-import { generateOutputText } from './output'
-import type { OutputType } from './output'
+import type { PersistedDataType } from './write'
 import { ALPHA_AND_DATE_ONLY, removeDangerousCharacters } from './string'
+import { head } from './array'
 
 const PORT = process.env.PORT ?? 3002
 
@@ -15,8 +13,6 @@ app.set('view engine', 'ejs')
 app.set('views', './src/views')
 
 app.use(express.static('public'))
-
-const head = (data: Array<string>) => (data?.length > 0 ? data[0] : '')
 
 app.get('/', async (req, res, next) => {
     try {
@@ -42,7 +38,7 @@ app.get('/words/:filename', async (req, res, next) => {
         const path = `./data/words/${cleanFilename}.json`
         console.info('file access:', path)
         const file = fs.readFileSync(path)
-        const data: OutputType = JSON.parse(file.toString())
+        const data: PersistedDataType = JSON.parse(file.toString())
         res.setHeader('Cache-Control', ONE_HOUR)
         res.render('word.ejs', data)
     } catch (e) {
@@ -50,26 +46,26 @@ app.get('/words/:filename', async (req, res, next) => {
     }
 })
 
-app.get('/random-word.json', async (req, res) => {
-    const { word, w } = getRandomWordFromList()
+app.get('/word-of-the-day.json', async (req, res, next) => {
+    try {
+        const files = fs.readdirSync('./data/words').reverse()
+        if (files.length === 0 || !files[0].endsWith('.json')) {
+            res.send(503)
+        }
+        const file = fs.readFileSync(`./data/words/${files[0]}`)
+        const data: PersistedDataType = JSON.parse(file.toString())
+        const languages = data.results.map(({ target }) => target.substring(0, 2)).slice(0, 4)
+        const translations = data.results.map(({ translations }) => head(translations)).slice(0, 4)
 
-    const frenchResult = await translate(w, 'french')
-    const spanishResult = await translate(w, 'spanish')
-    const italianResult = await translate(w, 'italian')
-    const portugueseResult = await translate(w, 'portuguese')
-
-    const response = {
-        english: word,
-        french: head(frenchResult?.translations),
-        spanish: head(spanishResult?.translations),
-        italian: head(italianResult?.translations),
-        portuguese: head(portugueseResult?.translations),
+        res.setHeader('Cache-Control', ONE_HOUR)
+        res.send({
+            word: data.word,
+            languages,
+            translations,
+        })
+    } catch (e) {
+        next(e)
     }
-
-    res.setHeader('Cache-Control', ONE_HOUR)
-    res.send(response)
-
-    await generateOutputText(word, w, [frenchResult, spanishResult, italianResult, portugueseResult])
 })
 
 app.listen(PORT, () => {

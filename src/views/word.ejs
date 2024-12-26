@@ -3,8 +3,24 @@
     <head>
         <title>Word of the day : <%= word %></title>
         <link rel="stylesheet" href="../css/simple.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="noindex,nofollow" />
+        <%- include ('partials/header.ejs') %>
+        <style>
+            .french {
+                color: blue;
+            }
+            .spanish {
+                color: orange;
+            }
+            .portuguese {
+                color: red;
+            }
+            .italian {
+                color: green;
+            }
+            .german {
+                color: yellow;
+            }
+        </style>
     </head>
 
     <body>
@@ -12,19 +28,21 @@
 
         <% results.forEach((result)=> { %>
         <section>
-            <h2><%= result.target %> : <%= result.translations.join(', ') %></h2>
+            <h2>
+                <span class="<%= result.target %>">in <%= result.target %></span> : <%= result.translations.join(', ')
+                %>
+            </h2>
 
             <details>
                 <summary>Examples</summary>
                 <dl>
                     <% result.examples.forEach(({source, target})=> { %>
-
                     <dt><%= source %></dt>
                     <dd><%= target %></dd>
                     <% }) %>
                 </dl>
             </details>
         </section>
-        <% }) %>
+        <% }) %> <%- include ('partials/footer.ejs') %>
     </body>
 </html>

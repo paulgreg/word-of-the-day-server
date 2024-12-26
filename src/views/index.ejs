@@ -3,8 +3,7 @@
     <head>
         <title>Word of the day</title>
         <link rel="stylesheet" href="./css/simple.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="bots" content="noindex,nofollow" />
+        <%- include ('partials/header.ejs') %>
     </head>
 
     <body>
@@ -15,5 +14,6 @@
             <li><a href="./words/<%= name %>"> <%= title %> </a></li>
             <% }) %>
         </ol>
+        <%- include ('partials/footer.ejs') %>
     </body>
 </html>
