@@ -5,54 +5,16 @@
         <link rel="stylesheet" href="../css/simple.css" />
         <link rel="icon" href="../book.svg" />
         <%- include ('partials/header.ejs') %>
-        <style>
-            section {
-                border-top: none;
-                border-bottom: none;
-            }
-            .french {
-                color: blue;
-            }
-
-            .spanish {
-                color: #ffa500;
-            }
-
-            .portuguese {
-                color: red;
-            }
-
-            .italian {
-                color: green;
-            }
-
-            .german {
-                color: yellow;
-            }
-        </style>
     </head>
 
     <body>
         <h1><a href="../">Word of the day</a> : <%= word %></h1>
 
-        <% results.forEach((result)=> { %>
-        <section>
-            <h2>
-                <span class="<%= result.target %>">in <%= result.target %></span> : <%= result.translations.join(', ')
-                %>
-            </h2>
-
-            <details>
-                <summary>Examples</summary>
-                <dl>
-                    <% result.examples.forEach(({source, target})=> { %>
-                    <dt><%= source %></dt>
-                    <dd><%= target %></dd>
-                    <% }) %>
-                </dl>
-            </details>
-        </section>
-        <% }) %>
+        <ul>
+            <% results.forEach((result)=> { %>
+            <li><%= result.lang %> : <%= result.word %></li>
+            <% }) %>
+        </ul>
         <footer><a href="../">back to home</a></footer>
     </body>
 </html>

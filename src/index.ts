@@ -2,7 +2,6 @@ import fs from 'fs'
 import express from 'express'
 import type { PersistedDataType } from './write'
 import { ALPHA_AND_DATE_ONLY, removeDangerousCharacters } from './string'
-import { head } from './array'
 import { convertToHexEscapedString, extractOnlyWord } from './words'
 
 const PORT = process.env.PORT ?? 3002
@@ -56,11 +55,8 @@ app.get('/word-of-the-day.json', async (req, res, next) => {
         const file = fs.readFileSync(`./data/words/${files[0]}`)
         const data: PersistedDataType = JSON.parse(file.toString())
         const results = data.results.slice(0, 4)
-        const languages = results.map(({ target }) => `${target.substring(0, 2)}:`)
-        const translations = results
-            .map(({ translations }) => head(translations))
-            .map((word) => extractOnlyWord(word))
-            .map((word) => convertToHexEscapedString(word))
+        const languages = results.map(({ lang }) => `${lang}:`)
+        const translations = results.map(({ word }) => word).map((word) => convertToHexEscapedString(word))
 
         const w = extractOnlyWord(data.word)
 

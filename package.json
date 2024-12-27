@@ -16,7 +16,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "reverso-api": "^2.22.10",
+    "translate": "^3.0.1",
     "tsc-alias": "^1.8.10",
     "vitest": "^2.1.8"
   },

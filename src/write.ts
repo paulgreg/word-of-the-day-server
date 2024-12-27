@@ -1,19 +1,17 @@
 import fs from 'fs'
 import { removeDangerousCharacters } from './string'
 
+export type PersistedLanguageType = {
+    lang: string
+    word: string
+}
 export type PersistedDataType = {
     word: string
     date: string
-    results: Array<ReversoResponse>
+    results: Array<PersistedLanguageType>
 }
 
-export const writeResult = async (word: string, w: string, results: Array<ReversoResponse>) => {
-    const missingTranslation = results.filter((result) => result.translations.length === 0)
-    if (missingTranslation.length > 0) {
-        console.warn(`${missingTranslation.length} missing translation. No output`)
-        return
-    }
-
+export const writeResult = async (word: string, w: string, results: Array<PersistedLanguageType>) => {
     const d = new Date()
     const filename = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}-${removeDangerousCharacters(w)}.json`
     try {
