@@ -55,14 +55,14 @@ app.get('/word-of-the-day.json', async (req, res, next) => {
         }
         const file = fs.readFileSync(`./data/words/${files[0]}`)
         const data: PersistedDataType = JSON.parse(file.toString())
-        const languages = data.results.map(({ target }) => target.substring(0, 2)).slice(0, 4)
+        const languages = data.results.map(({ target }) => `${target.substring(0, 2)}:`).slice(0, 4)
         const translations = data.results.map(({ translations }) => head(translations)).slice(0, 4)
 
         const w = extractOnlyWord(data.word)
 
         res.setHeader('Cache-Control', ONE_HOUR)
         res.send({
-            languages: ['en'].concat(languages),
+            languages: ['en:'].concat(languages),
             translations: [w].concat(translations),
         })
     } catch (e) {
