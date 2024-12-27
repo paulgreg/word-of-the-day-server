@@ -6,6 +6,10 @@
         <link rel="icon" href="../book.svg" />
         <%- include ('partials/header.ejs') %>
         <style>
+            section {
+                border-top: none;
+                border-bottom: none;
+            }
             .french {
                 color: blue;
             }
@@ -48,6 +52,7 @@
                 </dl>
             </details>
         </section>
-        <% }) %> <%- include ('partials/footer.ejs') %>
+        <% }) %>
+        <footer><a href="../">back to home</a></footer>
     </body>
 </html>

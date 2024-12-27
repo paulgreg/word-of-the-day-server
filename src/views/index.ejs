@@ -10,11 +10,11 @@
     <body>
         <h1>Word of the day</h1>
 
-        <ol reversed>
+        <ol>
             <% names.forEach(({name, title})=> {%>
             <li><a href="./words/<%= name %>"> <%= title %> </a></li>
             <% }) %>
         </ol>
-        <%- include ('partials/footer.ejs') %>
+        <footer><a href="https://github.com/paulgreg/word-of-the-day-server">source code</a>.</footer>
     </body>
 </html>
