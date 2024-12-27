@@ -3,6 +3,7 @@ import express from 'express'
 import type { PersistedDataType } from './write'
 import { ALPHA_AND_DATE_ONLY, removeDangerousCharacters } from './string'
 import { head } from './array'
+import { extractOnlyWord } from './words'
 
 const PORT = process.env.PORT ?? 3002
 
@@ -57,10 +58,12 @@ app.get('/word-of-the-day.json', async (req, res, next) => {
         const languages = data.results.map(({ target }) => target.substring(0, 2)).slice(0, 4)
         const translations = data.results.map(({ translations }) => head(translations)).slice(0, 4)
 
+        const w = extractOnlyWord(data.word)
+
         res.setHeader('Cache-Control', ONE_HOUR)
         res.send({
             languages: ['en'].concat(languages),
-            translations: [data.word].concat(translations),
+            translations: [w].concat(translations),
         })
     } catch (e) {
         next(e)
