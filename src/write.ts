@@ -13,7 +13,9 @@ export type PersistedDataType = {
 
 export const writeResult = async (word: string, w: string, results: Array<PersistedLanguageType>) => {
     const d = new Date()
-    const filename = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}-${removeDangerousCharacters(w)}.json`
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    const filename = `${d.getFullYear()}-${month}-${day}-${removeDangerousCharacters(w)}.json`
     try {
         const output: PersistedDataType = { word, date: d.toUTCString(), results }
         fs.writeFileSync(`./data/words/${filename}`, JSON.stringify(output, null, 0))
