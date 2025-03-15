@@ -1,1 +1,1 @@
-NODE_ENV=production pm2 start --name "word-of-the-day" dist/index.js --max-memory-restart 128M
+NODE_ENV=production pm2 start dist/index.js --name "word-of-the-day" --max-memory-restart 128M
