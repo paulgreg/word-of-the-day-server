@@ -2,7 +2,7 @@
   "name": "word-of-the-day-server",
   "type": "module",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "DEBUG=true tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc && tsc-alias",
