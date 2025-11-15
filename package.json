@@ -1,19 +1,21 @@
 {
   "name": "word-of-the-day-server",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "scripts": {
     "dev": "DEBUG=true tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc && tsc-alias",
-    "generate-word-of-the-day": "node dist/build-word-of-the-day.js",
+    "generateDb": "node dist/generateDb.js",
+    "importLegacyJSON": "node dist/importLegacyJSON.js",
     "test": "vitest",
     "start": "NODE_ENV=production node dist"
   },
-  "author": "",
+  "author": "Grégory PAUL",
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "openai": "^6.8.1",

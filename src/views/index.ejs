@@ -11,8 +11,8 @@
         <h1>Word of the day</h1>
 
         <ol>
-            <% names.forEach(({name, title})=> {%>
-            <li><a href="./words/<%= name %>"> <%= title %> </a></li>
+            <% words.forEach(({w, word, date, title})=> {%>
+            <li><a href="./words/<%= w %>"> <%= title %> </a></li>
             <% }) %>
         </ol>
         <footer><a href="https://github.com/paulgreg/word-of-the-day-server">source code</a></footer>

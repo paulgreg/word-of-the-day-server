@@ -1,14 +1,21 @@
 # Word of the day - server
 
-An API to get a random word and translation in a few languages. It uses ChatGPT for translations.
+A simple app to pick a random word daily and translate it in a few languages using OpenAI API.
 
-The purpose of that project is to serve the word of the day for the [eink esp32 display device](https://github.com/paulgreg/esp32_word-of-the-day).
+The purpose of that project is to serve a word each day and its translation for the [eink esp32 display device](https://github.com/paulgreg/esp32_word-of-the-day).
 
-## Generate word daily
+## Configuration
 
-   npm run build && OPENAI_API_KEY="your-key" npm run generate-word-of-the-day
+copy `.env.dist` to `.env` and set your OpenAI api key   then run : 
+
+    npm run build
+    npm run generateDb # to create sqlite db
+
+    # if you used previous version, you can import JSON files in data/word directory into db
+    npm run importLegacyJSON
 
 ## Sources
 
   - [5000 words list from Oxford](https://www.oxfordlearnersdictionaries.com/wordlists/oxford3000-5000)
   - [simple css](https://simplecss.org/)
+  - [OpenAI API](https://platform.openai.com/)
