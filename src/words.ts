@@ -6,10 +6,11 @@ if (process.env.DEBUG) {
     console.log(`${WORDS.length} words loaded`)
 }
 
-const getRandomNumberForToday = (min: number, max: number) => {
-    const today = new Date()
-    const firstDay = new Date(today.getFullYear(), 0, 0)
-    const dayOfYear = Math.floor((today.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24))
+export const extractOnlyWord = (word: string) => word.split(' ')[0]
+
+const getRandomNumberForToday = (d: Date, min: number, max: number) => {
+    const firstDay = new Date(d.getFullYear(), 0, 0)
+    const dayOfYear = Math.floor((d.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24))
     const seed = dayOfYear
 
     // Generate a random number based on the seed and the provided range
@@ -19,10 +20,8 @@ const getRandomNumberForToday = (min: number, max: number) => {
     return boundedRandom
 }
 
-export const extractOnlyWord = (word: string) => word.split(' ')[0]
-
-export const getRandomWordFromList = () => {
-    const random = getRandomNumberForToday(0, WORDS.length)
+export const getRandomWordFromList = (d: Date) => {
+    const random = getRandomNumberForToday(d, 0, WORDS.length)
     const word = WORDS[random]
     return { word, w: extractOnlyWord(word) }
 }
@@ -32,12 +31,13 @@ export const convertToHexEscapedString = (input: string) => {
 
     for (let i = 0; i < input.length; i++) {
         const char = input[i]
-        const charCode = input.charCodeAt(i)
+        const charCode = input.codePointAt(i)
+        if (!charCode) throw new Error('no code point')
 
         if (charCode > 127) {
             // if character is a non-ASCII character
             // Convert to hexadecimal and escape it as \xNN format
-            result += '\\x' + charCode.toString(16).padStart(2, '0')
+            result += String.raw`\x` + charCode.toString(16).padStart(2, '0')
         } else {
             // If ASCII character, add it directly to the result
             result += char

@@ -28,12 +28,6 @@ export const listWordsByDate = (): Array<ShortWordType> => {
     return query.all() as Array<ShortWordType>
 }
 
-export const getWordByDate = (dateStr: string): WordRecordType | undefined => {
-    const query = db.prepare('SELECT * FROM WORDS WHERE date = $dateStr')
-    const r = query.get({ $dateStr: dateStr })
-    if (r) return r as WordRecordType
-}
-
 export const getWordByW = (w: string): WordRecordType | undefined => {
     const query = db.prepare('SELECT * FROM WORDS WHERE w = $w')
     const r = query.get({ $w: w })

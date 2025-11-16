@@ -1,6 +1,6 @@
 import express, { type Response } from 'express'
 import { convertToHexEscapedString, extractOnlyWord, getRandomWordFromList } from './words'
-import { getWordByDate, getWordByW, insertWord, listWordsByDate } from './utils/db'
+import { getWordByW, insertWord, listWordsByDate } from './utils/db'
 import { convertDateToFR, getDateStr } from './utils/date'
 import { translate } from './utils/ia'
 import { WordRecordType } from './types'
@@ -61,15 +61,16 @@ const sendWordOfTheDay = (wordRecord: WordRecordType, res: Response) => {
 
 app.get('/word-of-the-day.json', async (req, res, next) => {
     try {
-        const today = getDateStr()
+        const d = new Date()
+        const today = getDateStr(d)
+        const { w, word } = getRandomWordFromList(d)
 
-        let wordRecordFromDb = getWordByDate(today)
+        let wordRecordFromDb = getWordByW(w)
 
         if (wordRecordFromDb) {
             return sendWordOfTheDay(wordRecordFromDb, res)
         } else {
-            const { w, word } = getRandomWordFromList()
-            const translatedWordRecord = await translate(w, word)
+            const translatedWordRecord = await translate(w, word, today)
             if (translatedWordRecord) {
                 insertWord(translatedWordRecord)
                 return sendWordOfTheDay(translatedWordRecord, res)

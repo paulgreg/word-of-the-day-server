@@ -1,8 +1,7 @@
 import OpenAI from 'openai'
 import type { WordRecordType } from '../types'
-import { getDateStr } from './date'
 
-export const translate = async (w: string, word: string): Promise<WordRecordType | undefined> => {
+export const translate = async (w: string, word: string, dateStr: string): Promise<WordRecordType | undefined> => {
     try {
         console.info('translate', w)
         const openai = new OpenAI()
@@ -34,7 +33,7 @@ export const translate = async (w: string, word: string): Promise<WordRecordType
         return {
             w,
             word,
-            date: getDateStr(),
+            date: dateStr,
             fr: translations[0],
             es: translations[1],
             it: translations[2],
