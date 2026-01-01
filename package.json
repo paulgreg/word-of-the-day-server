@@ -17,14 +17,14 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "openai": "^6.8.1",
+    "express": "^5.2.1",
+    "openai": "^6.15.0",
     "tsc-alias": "^1.8.16",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.16"
   },
   "devDependencies": {
-    "@types/express": "^5.0.5",
-    "tsx": "^4.20.6",
+    "@types/express": "^5.0.6",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
