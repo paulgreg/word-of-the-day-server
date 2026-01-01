@@ -6,13 +6,13 @@ export const translate = async (w: string, word: string, dateStr: string): Promi
         console.info('translate', w)
         const openai = new OpenAI()
         const completion = await openai.chat.completions.create({
-            model: 'gpt-4o',
+            model: 'gpt-4.1',
             store: true,
             messages: [
                 {
                     role: 'developer',
                     content:
-                        'You are a translator that translate a word of the day in different languages in that order : French, Spanish, Italian and Portuguese. You should only respond with one answer per language per line, without explanation. All translations should have the same meaning.',
+                        'You are a translator that translate a word of the day in different languages in that order : French, Spanish, Italian and Portuguese. You should only respond with one answer per language per line, without the language, without explanation. All translations should have the same meaning.',
                 },
                 {
                     role: 'user',
