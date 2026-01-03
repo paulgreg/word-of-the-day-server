@@ -9,7 +9,7 @@ if (process.env.DEBUG) {
 export const extractOnlyWord = (word: string) => word.split(' ')[0]
 
 const getRandomNumberForToday = (d: Date, min: number, max: number) => {
-    const firstDay = new Date(d.getFullYear(), 0, 0)
+    const firstDay = new Date(2025, 0, 0)
     const dayOfYear = Math.floor((d.getTime() - firstDay.getTime()) / (1000 * 60 * 60 * 24))
     const seed = dayOfYear
 
