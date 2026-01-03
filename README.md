@@ -11,9 +11,6 @@ copy `.env.dist` to `.env` and set your OpenAI api key   then run :
     npm run build
     npm run generateDb # to create sqlite db
 
-    # if you used previous version, you can import JSON files in data/word directory into db
-    npm run importLegacyJSON
-
 ## Sources
 
   - [5000 words list from Oxford](https://www.oxfordlearnersdictionaries.com/wordlists/oxford3000-5000)
