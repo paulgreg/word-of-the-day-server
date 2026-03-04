@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 const WORDS_FILE = './data/words.txt'
 const WORDS: Array<string> = fs.readFileSync(WORDS_FILE, 'utf8').split('\n')
 
