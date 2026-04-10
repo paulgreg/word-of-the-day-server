@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite'
-import type { ShortWordType, WordRecordType } from '../types'
+import type { ShortWordType, WordRecordType } from '../types.js'
 
 const path = './data/words.db'
 

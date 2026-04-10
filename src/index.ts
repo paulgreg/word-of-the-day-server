@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import express, { type Response } from 'express'
-import { convertToHexEscapedString, extractOnlyWord, getRandomWordFromList } from './words'
-import { getWordByW, insertWord, listWordsByDate } from './utils/db'
-import { convertDateToFR, getDateStr } from './utils/date'
-import { translate } from './utils/ia'
-import { WordRecordType } from './types'
+import { convertToHexEscapedString, extractOnlyWord, getRandomWordFromList } from './words.js'
+import { getWordByW, insertWord, listWordsByDate } from './utils/db.js'
+import { convertDateToFR, getDateStr } from './utils/date.js'
+import { translate } from './utils/ia.js'
+import { WordRecordType } from './types.js'
 
 const PORT = process.env.PORT ?? 3002
 

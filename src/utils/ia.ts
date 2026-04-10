@@ -1,4 +1,4 @@
-import type { WordRecordType } from '../types'
+import type { WordRecordType } from '../types.js'
 import { generateText } from 'ai'
 import { createMistral } from '@ai-sdk/mistral'
 
