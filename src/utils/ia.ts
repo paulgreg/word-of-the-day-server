@@ -4,7 +4,7 @@ import { createMistral } from '@ai-sdk/mistral'
 
 const system = `You are a translator that translate a word of the day in different languages in that order : French, Spanish, Italian and Portuguese.
 You should only respond with one answer per language per line, without the language, without explanation. Be concise.
-All translations should have the same meaning.`
+All translations should have the same meaning and be in lower case.`
 
 export const translate = async (w: string, word: string, dateStr: string): Promise<WordRecordType | undefined> => {
     try {
