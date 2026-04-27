@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "DEBUG=* tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc",
-    "generateDb": "node dist/generateDb.js",
+    "generateDb": "tsx src/generateDb.ts",
     "test": "vitest",
     "start": "NODE_ENV=production node dist"
   },
