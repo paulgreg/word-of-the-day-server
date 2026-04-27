@@ -13,14 +13,15 @@ date TEXT NOT NULL,
 fr TEXT NOT NULL,
 es TEXT NOT NULL,
 it TEXT NOT NULL,
-pt TEXT NOT NULL)`)
+pt TEXT NOT NULL,
+jp TEXT NOT NULL)`)
     db.exec(`CREATE INDEX IF NOT EXISTS idx_words_date_key ON words(date)`)
 }
 
 export const insertWord = async (record: WordRecordType) => {
-    const { w, word, date, fr, es, it, pt } = record
-    const insert = db.prepare('INSERT INTO words (w, word, date, fr, es, it, pt) VALUES (?, ?, ?, ?, ?, ?, ?)')
-    insert.run(w, word, date, fr, es, it, pt)
+    const { w, word, date, fr, es, it, pt, jp } = record
+    const insert = db.prepare('INSERT INTO words (w, word, date, fr, es, it, pt, jp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+    insert.run(w, word, date, fr, es, it, pt, jp)
 }
 
 export const listWordsByDate = (): Array<ShortWordType> => {

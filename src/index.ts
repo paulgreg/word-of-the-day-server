@@ -43,18 +43,19 @@ app.get('/words/:w', async (req, res, next) => {
 })
 
 const sendWordOfTheDay = (wordRecord: WordRecordType, res: Response) => {
-    const { word, fr, es, it, pt } = wordRecord
+    const { word, fr, es, it, pt, jp } = wordRecord
     const w = extractOnlyWord(word)
 
     res.setHeader('Cache-Control', ONE_HOUR)
     res.send({
-        languages: ['en:', 'fr:', 'es:', 'it:', 'pt:'],
+        languages: ['en:', 'fr:', 'es:', 'it:', 'pt:', 'jp:'],
         translations: [
             w,
             convertToHexEscapedString(fr),
             convertToHexEscapedString(es),
             convertToHexEscapedString(it),
             convertToHexEscapedString(pt),
+            convertToHexEscapedString(jp),
         ],
     })
 }

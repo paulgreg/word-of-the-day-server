@@ -6,6 +6,7 @@ export type WordRecordType = {
     es: string
     it: string
     pt: string
+    jp: string
 }
 
 export type ShortWordType = {

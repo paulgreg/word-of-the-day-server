@@ -3,8 +3,8 @@ import { createMistral, type MistralLanguageModelOptions } from '@ai-sdk/mistral
 import { generateText, Output } from 'ai'
 import { z } from 'zod'
 
-const system = `You are a translator that translate a word of the day in different languages : fr/French, es/Spanish, it/Italian, pt/Portuguese.
-Be concise. All translations should have the same meaning and be in lower case.`
+const system = `You are a translator that translate a word of the day in different languages : fr/French, es/Spanish, it/Italian, pt/Portuguese, jp/Japanese.
+All translations should have the same meaning and be in lower case. Be concise. For japanese, use rōmaji with only ASCII characters.`
 
 export const translate = async (w: string, word: string, dateStr: string): Promise<WordRecordType | undefined> => {
     try {
@@ -26,6 +26,7 @@ export const translate = async (w: string, word: string, dateStr: string): Promi
                     es: z.string(),
                     it: z.string(),
                     pt: z.string(),
+                    jp: z.string(),
                 }),
             }),
             system,
