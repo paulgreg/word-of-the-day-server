@@ -14,19 +14,19 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@ai-sdk/mistral": "^3.0.30",
-    "ai": "^6.0.168",
+    "@ai-sdk/mistral": "^3.0.37",
+    "ai": "^6.0.193",
     "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
-    "vitest": "^4.1.5",
-    "zod": "^4.3.6"
+    "vitest": "^4.1.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/json-schema": "^7.0.15",
-    "@types/node": "^25.6.0",
-    "tsx": "^4.21.0",
+    "@types/node": "^25.9.1",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
 }
