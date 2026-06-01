@@ -74,9 +74,9 @@ app.get('/word-of-the-day.json', async (req, res, next) => {
             const translatedWordRecord = await translate(w, word, today)
             if (translatedWordRecord) {
                 insertWord(translatedWordRecord)
-                return sendWordOfTheDay(translatedWordRecord, res)
+                sendWordOfTheDay(translatedWordRecord, res)
             } else {
-                res.send(503)
+                res.status(503).send('error').end()
             }
         }
     } catch (e) {
