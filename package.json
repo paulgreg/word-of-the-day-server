@@ -8,7 +8,9 @@
     "build": "tsc",
     "generateDb": "tsx src/generateDb.ts",
     "test": "vitest",
-    "start": "NODE_ENV=production node dist"
+    "start": "NODE_ENV=production node dist",
+    "sync-translations:dry-run": "tsx scripts/sync-translations.ts --dry-run",
+    "sync-translations": "tsx scripts/sync-translations.ts"
   },
   "author": "Grégory PAUL",
   "license": "MIT",

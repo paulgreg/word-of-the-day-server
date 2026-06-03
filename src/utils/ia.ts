@@ -48,5 +48,6 @@ export const translate = async (w: string, word: string, dateStr: string): Promi
         }
     } catch (e) {
         console.error(e)
+        throw e
     }
 }
