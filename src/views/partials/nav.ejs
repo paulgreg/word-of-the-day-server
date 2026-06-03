@@ -1,0 +1,8 @@
+<h1><a href="<%= rootURL %>">Word of the day</a></h1>
+<nav>
+    <ul>
+        <% letters.forEach((l) => { %>
+        <li><a href="<%= rootURL %><%= l %>"><%= l %></a></li>
+        <% }) %>
+    </ul>
+</nav>

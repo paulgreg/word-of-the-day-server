@@ -1,15 +1,17 @@
 # Word of the day - server
 
-A simple app to pick a random word daily and translate it in a few languages using OpenAI API.
+A simple app to pick a random word daily and translate it in a few languages using an LLM API.
 
 The purpose of that project is to serve a word each day and its translation for the [eink esp32 display device](https://github.com/paulgreg/esp32_word-of-the-day).
 
-## Configuration
+Use `ROOT_URL` to define base URL.
 
-copy `.env.dist` to `.env` and set your OpenAI api key   then run : 
+## Scripts
 
-    npm run build
-    npm run generateDb # to create sqlite db
+- `npm run generateDb` : initialize the SQLite database 
+- `npm run sync-translations` : translate words from `data/words.txt` and insert into database (requires `AI_GATEWAY_API_KEY` and `LLM_MODEL` env vars)
+- `npm run sync-translations:dry-run` : won’t call LLM translations
+
 
 ## Sources
 

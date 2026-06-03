@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Word of the day : <%= word %></title>
+        <title>Words starting with <%= letter %></title>
         <%- include ('partials/header.ejs') %>
     </head>
-
     <body>
         <%- include ('partials/nav.ejs') %>
-
         <main>
-            <h2><%= word %></h2>
-
+            <h2>Words starting with <%= letter.toLowerCase() %></h2>
             <ul>
-                <li>fr : <%= fr %></li>
-                <li>es : <%= es %></li>
-                <li>it : <%= it %></li>
-                <li>pt : <%= pt %></li>
-                <li>jp : <%= jp %></li>
+                <% words.forEach(({w, word}) => { %>
+                <li><a href="<%= rootURL %>word/<%= w %>"><%= word %></a></li>
+                <% }); %>
             </ul>
         </main>
-
         <footer><a href="<%= rootURL %>">back to home</a></footer>
     </body>
 </html>

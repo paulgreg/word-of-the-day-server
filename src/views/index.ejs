@@ -2,19 +2,21 @@
 <html lang="en">
     <head>
         <title>Word of the day</title>
-        <link rel="stylesheet" href="./css/simple.css" />
-        <link rel="icon" href="./book.svg" />
         <%- include ('partials/header.ejs') %>
     </head>
-
     <body>
-        <h1>Word of the day</h1>
-
-        <ol>
-            <% words.forEach(({w, word, date, title})=> {%>
-            <li><a href="./words/<%= w %>"> <%= title %> </a></li>
-            <% }) %>
-        </ol>
+        <%- include ('partials/nav.ejs') %>
+        <main>
+            <h2><%= word %></h2>
+            <ul>
+                <li>en : <%= word %></li>
+                <li>fr : <%= fr %></li>
+                <li>es : <%= es %></li>
+                <li>it : <%= it %></li>
+                <li>pt : <%= pt %></li>
+                <li>jp : <%= jp %></li>
+            </ul>
+        </main>
         <footer><a href="https://github.com/paulgreg/word-of-the-day-server">source code</a></footer>
     </body>
 </html>

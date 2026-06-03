@@ -1,7 +1,6 @@
 export type WordRecordType = {
     w: string
     word: string
-    date: string
     fr: string
     es: string
     it: string
@@ -12,5 +11,4 @@ export type WordRecordType = {
 export type ShortWordType = {
     w: string
     word: string
-    date: string
 }

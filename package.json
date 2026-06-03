@@ -6,29 +6,29 @@
   "scripts": {
     "dev": "DEBUG=* tsx watch --include './src/**/*' src/index.ts",
     "build": "tsc",
-    "generateDb": "tsx src/generateDb.ts",
     "test": "vitest",
+    "lint": "tsc --noEmit",
     "start": "NODE_ENV=production node dist",
-    "sync-translations:dry-run": "tsx scripts/sync-translations.ts --dry-run",
-    "sync-translations": "tsx scripts/sync-translations.ts"
+    "generate-db": "tsx src/scripts/generateDb.ts",
+    "sync-translations:dry-run": "tsx src/scripts/sync-translations.ts --dry-run",
+    "sync-translations": "tsx src/scripts/sync-translations.ts"
   },
   "author": "Grégory PAUL",
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@ai-sdk/mistral": "^3.0.37",
-    "ai": "^6.0.193",
-    "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
-    "express": "^5.2.1",
-    "vitest": "^4.1.7",
-    "zod": "^4.4.3"
+    "express": "^5.2.1"
   },
   "devDependencies": {
+    "@ai-sdk/mistral": "^3.0.37",
     "@types/express": "^5.0.6",
     "@types/json-schema": "^7.0.15",
     "@types/node": "^25.9.1",
+    "ai": "^6.0.193",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8",
+    "zod": "^4.4.3"
   }
 }
